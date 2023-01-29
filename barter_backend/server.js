@@ -18,23 +18,23 @@ dotenv.config({ path: "./config.env" });
 const server = http.createServer(app);
 const io = socketio(server).sockets;
 
-// DB Config
+// DB Config for mongo database
 const db = config.get("mongoURI");
 
 // Connect to Mongo
 mongoose
-    .connect(db, {
-        useNewUrlParser: true,
-        useCreateIndex: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false,
-    })
-    .then(() => console.log("MongoDB Connected..."))
-    .catch((err) => console.log(err));
+  .connect(db, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  })
+  .then(() => console.log("MongoDB Connected..."))
+  .catch((err) => console.log(err));
 
 // * Dev logging
 if (process.env.NODE_ENV === "development") {
-    app.use(morgan("dev"));
+  app.use(morgan("dev"));
 }
 
 // Link to router
